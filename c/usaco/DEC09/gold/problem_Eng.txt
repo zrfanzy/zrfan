@@ -1,0 +1,266 @@
+**********************************************************************
+                           GOLD PROBLEMS
+**********************************************************************
+                  Three problems numbered 1 through 3
+**********************************************************************
+
+Problem 1: Dizzy Cows [Alex Schwendner, 2009]
+
+The cows have taken to racing each other around the farm but they
+get very dizzy when running in circles, and everyone knows that
+dizzy cows don't produce any milk. Farmer John wants to convert all
+of the two-way cow paths in the farm to one-way paths in order to
+eliminate any 'cycles' and prevent the cows from getting dizzy.  A
+'cycle' enables a cow to traverse one or more cow paths and arrive
+back at her starting point, thus completing a loop or circle.
+
+The farm comprises N pastures (1 <= N <= 100,000) conveniently
+numbered 1..N. M1 (1 <= M1 <= 100,000) one-way cow paths and M2
+two-way cow paths (1 <= M2 <= 100,000) connect the pastures. No
+path directly connects a pasture to itself, although multiple paths
+might connect two different pastures. A cow may or may not be able
+to travel between any two given pastures by following a sequence
+of cow paths.
+
+Your job is to assign a direction to the two-way cow paths such
+that the entire farm (ultimately with only one-way paths) has no
+cycles. That is, there should be no sequence of one-way cow paths
+which leads back to its starting position. The existing one-way cow
+paths do not form a cycle and should be left as they are.
+
+One-way cow paths run from pasture A_i (1 <= A_i <= N) to pasture
+B_i (1 <= B_i <= N). Two-way cow paths connect pastures X_i (1 <=
+X_i <= N) and Y_i (1 <= Y_i <= N).
+
+Consider this example:
+
+             1-->2
+             |  /|
+             | / |
+             |/  |
+             3<--4
+
+The cow paths between pastures 1 and 3, 2 and 3, and 2 and 4 are
+two-way paths. One-way paths connect 1 to 2 and also 4 to 3. One
+valid way to convert the two-way paths into one-way paths in such
+a way that there are no cycles would be to direct them from 1 to
+3, from 2 to 3, and from 3 to 4:
+
+             1-->2
+             |  /|
+             | / |
+             vL  v
+             3<--4
+
+PROBLEM NAME: dizzy
+
+INPUT FORMAT:
+
+* Line 1: Three space separated integers: N, M1, and M2
+
+* Lines 2..1+M1: Line i+1 describes a one-way cow path using two space
+        separated integers: A_i and B_i
+
+* Lines 2+M1..1+M1+M2: Line i+M1+1 describes a two-way cow path using
+        two space separated integers: X_i and Y_i
+
+SAMPLE INPUT (file dizzy.in):
+
+4 2 3
+1 2
+4 3
+1 3
+4 2
+3 2
+
+OUTPUT FORMAT:
+
+* Lines 1..M2: Line i should contain two space-separated integers:
+        either X_i and Y_i or Y_i and X_i, depending on the direction
+        assigned to the i-th two-way path. The two-way paths must
+        appear in the same order in the output as they do in the
+        input. If there is no solution, output "-1" on a single line.
+
+SAMPLE OUTPUT (file dizzy.out):
+
+1 3
+2 4
+2 3
+
+**********************************************************************
+
+Problem 2: Cow Toll Paths [Alex Schwendner, 2009]
+
+Like everyone else, FJ is always thinking up ways to increase his
+revenue. To this end, he has set up a series of tolls that the cows
+will pay when they traverse the cowpaths throughout the farm.
+
+The cows move from any of the N (1 <= N <= 250) pastures conveniently
+numbered 1..N to any other pasture over a set of M (1 <= M <= 10,000)
+bidirectional cowpaths that connect pairs of different pastures A_j
+and B_j (1 <= A_j <= N; 1 <= B_j <= N). FJ has assigned a toll L_j
+(1 <= L_j <= 100,000) to the path connecting pastures A_j and B_j.
+
+While there may be multiple cowpaths connecting the same pair of
+pastures, a cowpath will never connect a pasture to itself.  Best
+of all, a cow can always move from any one pasture to any other
+pasture by following some sequence of cowpaths.
+
+In an act that can only be described as greedy, FJ has also assigned a
+toll C_i (1 <= C_i <= 100,000) to every pasture. The cost of moving
+from one pasture to some different pasture is the sum of the tolls
+for each of the cowpaths that were traversed plus a *single additional
+toll* that is the maximum of all the pasture tolls encountered along
+the way, including the initial and destination pastures.
+
+The patient cows wish to investigate their options. They want you
+to write a program that accepts K (1 <= K <= 10,000) queries and
+outputs the minimum cost of trip specified by each query. Query i
+is a pair of numbers s_i and t_i (1 <= s_i <= N; 1 <= t_i <= N; s_i !=
+t_i) specifying a starting and ending pasture.
+
+Consider this example diagram with five pastures:
+
+The 'edge toll' for the path from pasture 1 to pasture 2 is 3.
+Pasture 2's 'node toll' is 5.
+
+To travel from pasture 1 to pasture 4, traverse pastures 1 to 3 to
+5 to 4. This incurs an edge toll of 2+1+1=4 and a node toll of 4
+(since pasture 5's toll is greatest), for a total cost of 4+4=8.
+
+The best way to travel from pasture 2 to pasture 3 is to traverse
+pastures 2 to 5 to 3. This incurs an edge toll of 3+1=4 and a node
+toll of 5, for a total cost of 4+5=9.
+
+PROBLEM NAME: toll
+
+INPUT FORMAT:
+
+* Line 1: Three space separated integers: N, M, and K
+
+* Lines 2..N+1: Line i+1 contains a single integer: C_i
+
+* Lines N+2..N+M+1: Line j+N+1 contains three space separated
+        integers: A_j, B_j, and L_j
+
+* Lines N+M+2..N+M+K+1: Line i+N+M+1 specifies query i using two
+        space-separated integers: s_i and  t_i
+
+SAMPLE INPUT (file toll.in):
+
+5 7 2
+2
+5
+3
+3
+4
+1 2 3
+1 3 2
+2 5 3
+5 3 1
+5 4 1
+2 4 3
+3 4 4
+1 4
+2 3
+
+OUTPUT FORMAT:
+
+* Lines 1..K: Line i contains a single integer which is the lowest
+        cost of any route from s_i to t_i
+
+SAMPLE OUTPUT (file toll.out):
+
+8
+9
+
+*pic:http://ace.delos.com/usaco/1328.jpg
+
+**********************************************************************
+
+Problem 3: Video Game Troubles [Jeffrey Wang, 2007]
+
+Farmer John's cows love their video games! FJ noticed that after
+playing these games that his cows produced much more milk than
+usual, surely because contented cows make more milk.
+
+The cows disagree, though, on which is the best game console. One
+cow wanted to buy the Xbox 360 to play Halo 3; another wanted to
+buy the Nintendo Wii to play Super Smash Brothers Brawl; a third
+wanted to play Metal Gear Solid 4 on the PlayStation 3. FJ wants
+to purchase the set of game consoles (no more than one each) and games (no
+more than one each -- and within the constraints of a given budget) that
+helps his cows produce the most milk and thus nourish the most children.
+
+FJ researched N (1 <= N <= 50) consoles, each with a console price
+P_i (1 <= P_i <= 1000) and a number of console-specific games G_i
+(1 <= G_i <= 10). A cow must, of course, own a console before she
+can buy any game that is specific to that console. Each individual
+game has a game price GP_j (1 <= GP_j price <= 100) and a production
+value (1 <= PV_j <= 1,000,000), which indicates how much milk a cow
+will produce after playing the game. Lastly, Farmer John has a
+budget V (1 <= V <= 100,000) which is the maximum amount of money
+he can spend. Help him maximize the sum of the production values
+of the games he buys.
+
+Consider one dataset with N=3 consoles and a V=$800 budget. The
+first console costs $300 and has 2 games with cost $30 and $25 and
+production values as shown:
+
+    Game #    Cost    Production Value
+      1       $30          50
+      2       $25          80
+
+The second console costs $600 and has only 1 game:
+
+    Game #    Cost    Production Value
+      1       $50          130
+
+The third console costs $400 and has 3 games:
+
+    Game #    Cost    Production Value
+      1       $40         70
+      2       $30         40
+      3       $35         60
+
+Farmer John should buy consoles 1 and 3, game 2 for console 1, and
+games 1 and 3 for console 3 to maximize his expected production at
+210:
+
+                                Production Value
+        Budget:     $800      
+        Console 1  -$300
+           Game 2   -$25              80
+        Console 3  -$400
+           Game 1   -$40              70
+           Game 3   -$35              60
+      -------------------------------------------
+        Total:         0 (>= 0)      210
+
+PROBLEM NAME: vidgame
+
+INPUT FORMAT:
+
+* Line 1: Two space-separated integers: N and V
+
+* Lines 2..N+1: Line i+1 describes the price of and the games
+        available for console i; it contains: P_i, G_i, and G_i pairs
+        of space-separated integers GP_j, PV_j
+
+SAMPLE INPUT (file vidgame.in):
+
+3 800
+300 2 30 50 25 80
+600 1 50 130
+400 3 40 70 30 40 35 60
+
+OUTPUT FORMAT:
+
+* Line 1: The maximum production value that Farmer John can get with
+        his budget.
+
+SAMPLE OUTPUT (file vidgame.out):
+
+210
+
+**********************************************************************

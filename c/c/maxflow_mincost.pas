@@ -1,0 +1,89 @@
+var
+ left,c,w:array[1..100,1..100] of integer;
+ widen:array[0..100,1..2] of integer;
+ last:array[1..100] of integer;
+ next:array[1..100,0..100] of integer;
+ i,j,m,n,x,y,s,t,maxflow,mincost:integer;
+ level:boolean;
+procedure levelgraph;
+var
+ a:array[1..200] of integer;
+ lw:array[1..100] of integer;
+ head,tail,i,x,y:integer;
+begin
+ for i:=1 to n do lw[i]:=maxint; fillchar(last,sizeof(last),0);
+ a[1]:=s; lw[1]:=0; head:=1; tail:=1;
+ while head<=tail do
+  begin
+   x:=a[head];
+   for i:=1 to next[x,0] do
+    begin
+     y:=next[x,i];
+     if lw[x]+w[x,y]<lw[y] then
+      begin
+       last[y]:=x;
+       lw[y]:=lw[x]+w[x,y];
+       inc(tail); a[tail]:=y;
+       if y=t then level:=true;
+      end;
+    end;
+   inc(head);
+  end;
+end;
+procedure modify(k,z:integer);
+var
+ i,j,x,y:integer;
+begin
+ x:=widen[k,1]; y:=widen[k-1,1];
+ if k=1 then exit;
+ inc(mincost,z*w[x,y]);
+ dec(left[x,y],z);
+ if left[x,y]=0 then
+  begin
+   for i:=1 to next[x,0] do if next[x,i]=y then break;
+   for j:=i to next[x,0]-1 do next[x,j]:=next[x,j+1];
+   dec(next[x,0]);
+  end;
+ if left[y,x]=0 then
+  begin
+   inc(next[y,0]); next[y,next[y,0]]:=x;
+  end;
+ inc(left[y,x],z);
+ modify(k-1,z);
+end;
+function min(a,b:integer):integer;
+begin
+ if a<b then exit(a) else exit(b);
+end;
+procedure flow(f,k:integer);
+var
+ i:integer;
+begin
+ if f=s then begin inc(maxflow,widen[k-1,2]); widen[k,1]:=s; modify(k,widen[k-1,2]); exit; end;
+ if last[f]<>0 then
+  begin
+   widen[k,1]:=f; widen[k,2]:=min(widen[k-1,2],left[last[f],f]);
+   flow(last[f],k+1);
+  end;
+end;
+begin
+ assign(input,'maxflow_mincost3.in'); reset(input);
+ assign(output,'maxflow_mincost.out'); rewrite(output);
+ readln(s,t);
+ readln(n,m);
+ for i:=1 to m do
+  begin
+   read(x,y,j); c[x,y]:=j; inc(next[x,0]); next[x,next[x,0]]:=y;
+   read(j); w[x,y]:=j; w[y,x]:=-j;
+  end;
+ left:=c;
+  repeat
+   level:=false;
+   fillchar(last,sizeof(last),0); levelgraph;
+   if level=false then break;
+   widen[0,2]:=maxint; flow(t,1);
+  until false;
+ writeln(maxflow);
+ writeln(mincost);
+ close(input); close(output);
+end.

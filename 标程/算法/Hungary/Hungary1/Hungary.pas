@@ -1,0 +1,37 @@
+var
+ a:array[1..100] of integer;
+ b:array[1..100] of boolean;
+ c:array[1..100,1..100] of boolean;
+ m,n,p,i,x,y:integer;
+function find(x:integer):boolean;
+var
+ i:integer;
+begin
+ for i:=1 to n do
+   if c[x,i] and (b[i]=false) then
+    begin
+     b[i]:=true;
+     if (a[i]=0) or find(a[i]) then
+      begin
+       a[i]:=x; b[i]:=false; exit(true);
+      end;
+     b[i]:=false;
+    end;
+ exit(false);
+end;
+begin
+ assign(input,'Hungary3.in'); reset(input);
+ assign(output,'Hungary3.out'); rewrite(output);
+ readln(m,n,p);
+ for i:=1 to p do
+  begin
+   readln(x,y);
+   c[x,y]:=true;
+  end;
+ fillchar(b,sizeof(b),false);
+ x:=0;
+ for i:=1 to m do if find(i) then inc(x);
+ writeln(x);
+ for i:=1 to n do if a[i]>0 then writeln(a[i],'->',i);
+ close(input); close(output);
+end.

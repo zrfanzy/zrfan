@@ -1,0 +1,208 @@
+**********************************************************************
+                           BRONZE PROBLEMS
+**********************************************************************
+                  Three problems numbered 11 through 13
+**********************************************************************
+
+Problem 11: The Big Dance [Rob Kolstad, 2009]
+
+Bessie and the herd, N (1 <= N <= 2,200) conveniently numbered 1..N
+cows in all, have gone to a dance where plenty of bulls are available
+as dancing partners. This dance is known as the "odd cow out" dance
+because of the way cows are chosen to dance with bulls.
+
+The cows are lined up in numerical order and the 'middle' point is
+chosen. It either divides the line of cows exactly in half or it
+is chosen so that the first set of cows has just one more cow in
+it than the second set. If exactly two cows are in the set, they
+are chosen to dance with bulls.  If one cow is in the set, she is
+sent home with a consolation prize of a beautiful rose.
+
+If the set has more than two cows in it, the process is repeated
+perhaps again and again until sets with just one or two cows emerge.
+
+The two cow ID numbers are multiplied together and added to a global
+sum.
+
+Given the number of cows at the dance, compute the global sum after
+all the eligible cows are chosen.
+
+Consider a dance with 11 cows numbered 1..11. Here is the
+sequence of dividing them:
+
+1     2     3     4     5     6  |  7     8     9     10     11
+
+    1     2     3  |  4     5     6
+
+        1     2  |  3
+                1  2        => 1*2=2 added to sum -> sum=2
+                3           => sent home with rose
+
+        4     5  |  6
+                4  5        => 4*5=20 added to sum -> sum=22
+                6           => sent home with rose
+
+    7     8     9  | 10    11
+
+        7     8  |  9
+                7  8        => 7*8=56 added to sum -> sum=78
+                9           => sent home with rose
+        10    11            => 10*11=110 added to sum -> sum=188
+
+So the sum for this dance would be 188.
+
+PROBLEM NAME: bigdance
+
+INPUT FORMAT:
+
+* Line 1: A single integer: N
+
+SAMPLE INPUT (file bigdance.in):
+
+11
+
+OUTPUT FORMAT:
+
+* Line 1: A single integer that is the sum computed as prescribed.
+
+SAMPLE OUTPUT (file bigdance.out):
+
+188
+
+**********************************************************************
+
+Problem 12: Lonesome Partners [Rob Kolstad, 2009]
+
+Bessie and the rest of the herd totaling N (2 <= N <= 500) cows
+have gone to the dance. For the cows-only part of the dance, two
+cows are chosen as the "Belles of the Ball". Farmer John records
+the X,Y coordinates (0 <= X_i <= 5,000; 0 <= Y_i <= 5,000) of all
+the cows in the dance hall and then asks you to determine the indices
+of the two cows who are farthest apart (which, happily, is guaranteed
+to be unique). Distance is the normal cartesian distance calculated
+as the square root of the sum of the squares of the differences in the
+row and column coordinates.
+ 
+In a dance with just eight cows:
+ 
+ 8 | . C . . . . . . . .
+ 7 | . . . . . . . . . .
+ 6 | . C . . . . . . . .
+ 5 | . . . C C . C . . .
+ 4 | . . . . C . . . . .
+ 3 | . . C . . . . . . .
+ 2 | . . . . . . . . . .
+ 1 | . . . . . . . . . C
+ 0 +--------------------
+   0 1 2 3 4 5 6 7 8 8 9
+ 
+Farmer John hopes you would choose the cows at 2,8 and 9,1 as
+farthest apart.
+
+PROBLEM NAME: lonesome
+
+INPUT FORMAT:
+
+* Line 1: A single integer: N
+
+* Lines 2..N+1: Line i+1 contains the integer coordinate location of
+        cow i: X_i and Y_i
+
+SAMPLE INPUT (file lonesome.in):
+
+8
+2 6
+3 3
+2 8
+4 5
+7 5
+5 5
+9 1
+5 4
+
+OUTPUT FORMAT:
+
+* Line 1: Two sorted integers that are the indices of the two cows
+        that are located farthest apart.
+
+SAMPLE OUTPUT (file lonesome.out):
+
+3 7
+
+OUTPUT DETAILS:
+
+Cow #3 and Cow #7 are the cow numbers of the cows from the example in the text.
+
+**********************************************************************
+
+Problem 13: Shorter Musical Notes [Neal Wu, 2009]
+
+FJ is going to teach his cows how to play a song. The song consists
+of N (1 <= N <= 10,000) notes, and the i-th note lasts for B_i (1
+<= B_i <= 120) beats (thus no song is longer than 1,200,000 beats).
+The cows will begin playing the song at time 0; thus, they will
+play note 1 from time 0 through just before time B_1, note 2 from
+time B_1 through just before time B_1 + B_2, etc.
+
+However, recently the cows have lost interest in the song, as they
+feel that it is too long and boring. Thus, to make sure his cows
+are paying attention, he asks them Q (1 <= Q <= 50,000) questions
+of the form, "In the interval from time T through just before time
+T+1, which note should you be playing?" The cows need your help to
+answer these questions which are supplied as T_i (0 <= T_i <=
+end_of_song).
+
+Consider this song with three notes of durations 2, 1, and 3 beats:
+
+Beat:   0    1    2    3    4    5    6    ...
+        |----|----|----|----|----|----|--- ...
+        1111111111     :              :
+                  22222:              :
+                       333333333333333:
+
+Here is a set of five queries along with the resulting answer:
+
+   Query    Note
+     2        2
+     3        3
+     4        3
+     0        1
+     1        1
+
+PROBLEM NAME: snotes
+
+INPUT FORMAT:
+
+* Line 1: Two space-separated integers: N and Q
+
+* Lines 2..N+1: Line i+1 contains the single integer: B_i
+
+* Lines N+2..N+Q+1: Line N+i+1 contains a single integer: T_i
+
+SAMPLE INPUT (file snotes.in):
+
+3 5
+2
+1
+3
+2
+3
+4
+0
+1
+
+OUTPUT FORMAT:
+
+* Lines 1..Q: Line i of the output contains the result of query i as a
+        single integer.
+
+SAMPLE OUTPUT (file snotes.out):
+
+2
+3
+3
+1
+1
+
+**********************************************************************
+

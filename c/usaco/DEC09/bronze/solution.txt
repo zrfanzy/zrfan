@@ -1,0 +1,7 @@
+1.模拟（类似二分）
+
+2.模拟
+
+3.见silver题解
+
+官方解答：http://ace.delos.com/DEC09.htm

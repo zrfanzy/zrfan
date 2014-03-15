@@ -1,0 +1,87 @@
+int st[maxn]={},ed[maxn]={},l[maxn]={},r[maxn]={},f[maxn]={};
+int tot=0;
+int top=1;
+
+inline void turn_left(int ll, int rr) 
+{
+    if (ll==top)
+    {
+        top=rr;
+        f[rr]=0;
+    }
+    else
+    {
+        int ff=f[ll];
+        f[rr]=ff;
+        if (ll==l[ff])
+            l[ff]=rr;
+        else
+            r[ff]=rr;
+    };
+    r[ll]=l[rr];
+    f[r[ll]]=ll;
+    l[rr]=ll;
+    f[ll]=rr;
+};
+  
+inline void turn_right(int ll, int rr) 
+{
+    if (rr==top)
+    {
+        top=ll;
+        f[ll]=0;
+    }
+    else
+    {
+        int ff=f[rr];
+        f[ll]=ff;
+        if (rr==l[ff])
+            l[ff]=ll;
+        else
+            r[ff]=ll;
+    };
+    l[rr]=r[ll];
+    f[l[rr]]=rr;
+    r[ll]=rr;
+    f[rr]=ll;
+};
+
+inline void splay(int x)
+{
+    int y,z;
+    while (x!=top)
+    {
+        if ((y=f[x])==top)
+            if (l[y]==x)
+                turn_right(x,y);
+            else
+                turn_left(y,x);
+        else
+            if (l[y]==x)
+            {
+                if (l[ (z=f[y]) ]==y)
+                {
+                    turn_right(y,z);
+                    turn_right(x,y);
+                }
+                else
+                {
+                    turn_right(x,y);
+                    turn_left(z,x);
+                };
+            }
+            else
+            {
+                if (r[ (z=f[y]) ]==y)
+                {
+                    turn_left(z,y);
+                    turn_left(y,x);
+                }
+                else
+                {
+                    turn_left(y,x);
+                    turn_right(x,z);
+                };
+            };
+    };
+};

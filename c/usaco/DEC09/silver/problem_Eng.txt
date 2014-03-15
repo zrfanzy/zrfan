@@ -1,0 +1,211 @@
+**********************************************************************
+                           SILVER PROBLEMS
+**********************************************************************
+                  Three problems numbered 6 through 8
+**********************************************************************
+
+Problem 6: Bobsledding [Brian Jacokes, 2009]
+
+Bessie has entered a bobsled competition because she hopes her hefty
+weight will give her an advantage over the L meter course (2 <= L
+<= 1,000,000,000).
+
+Bessie will push off the starting line at 1 meter per second, but
+her speed can change while she rides along the course. Near the
+middle of every meter Bessie travels, she can change her speed
+either by using gravity to accelerate by one meter per second or
+by braking to stay at the same speed or decrease her speed by one
+meter per second.
+
+Naturally, Bessie must negotiate N (1 <= N <= 100,000) turns on the
+way down the hill. Turn i is located T_i meters from the course
+start (1 <= T_i <= L-1), and she must be enter the corner meter at
+a speed of at most S_i meters per second (1 <= S_i <= 1,000,000,000).
+Bessie can cross the finish line at any speed she likes.
+
+Help Bessie learn the fastest speed she can attain without exceeding
+the speed limits on the turns.
+
+Consider this course with the meter markers as integers and the
+turn speed limits in brackets (e.g., '[3]'):
+
+|   1   2   3   4   5   6   7[3]
+|---+---+---+---+---+---+---+
+|                            \
+Start                         + 8    
+                               \
+                                + 9    
+                                 \
+                                  + 10       +++ 14 (finish)
+                                   \         /
+                              11[1] +---+---+
+                                        12  13[8]
+
+Below is a chart of Bessie's speeds at the beginning of each meter length
+of the course:
+
+Max:                              3               1       8
+Mtrs: 0   1   2   3   4   5   6   7   8   9  10  11  12  13  14 
+Spd:  1   2   3   4   5   5   4   3   4   3   2   1   2   3   4
+
+Her maximum speed was 5 near the beginning of meter 4.
+
+PROBLEM NAME: bobsled
+
+INPUT FORMAT:
+
+* Line 1: Two space-separated integers: L and N
+
+* Lines 2..N+1: Line i+1 describes turn i with two space-separated
+        integers: T_i and S_i
+
+SAMPLE INPUT (file bobsled.in):
+
+14 3
+7 3
+11 1
+13 8
+
+OUTPUT FORMAT:
+
+* Line 1: A single integer, representing the maximum speed which
+        Bessie can attain between the start and the finish line,
+        inclusive.
+
+SAMPLE OUTPUT (file bobsled.out):
+
+5
+
+**********************************************************************
+
+Problem 7: Music Notes [Neal Wu, 2008]
+
+FJ is going to teach his cows how to play a song. The song consists
+of N (1 <= N <= 50,000) notes, and the i-th note lasts for B_i (1
+<= B_i <= 10,000) beats (thus no song is longer than 500,000,000
+beats). The cows will begin playing the song at time 0; thus, they
+will play note 1 from time 0 through just before time B_1, note 2
+from time B_1 through just before time B_1 + B_2, etc.
+
+However, recently the cows have lost interest in the song, as they
+feel that it is too long and boring. Thus, to make sure his cows
+are paying attention, he asks them Q (1 <= Q <= 50,000) questions
+of the form, "In the interval from time T through just before time
+T+1, which note should you be playing?" The cows need your help to
+answer these questions which are supplied as T_i (0 <= T_i <=
+end_of_song).
+
+Consider this song with three notes of durations 2, 1, and 3 beats:
+
+Beat:   0    1    2    3    4    5    6    ...
+        |----|----|----|----|----|----|--- ...
+        1111111111     :              :
+                  22222:              :
+                       333333333333333:
+
+Here is a set of five queries along with the resulting answer:
+
+   Query    Note
+     2        2
+     3        3
+     4        3
+     0        1
+     1        1
+
+PROBLEM NAME: mnotes
+
+INPUT FORMAT:
+
+* Line 1: Two space-separated integers: N and Q
+
+* Lines 2..N+1: Line i+1 contains the single integer: B_i
+
+* Lines N+2..N+Q+1: Line N+i+1 contains a single integer: T_i
+
+SAMPLE INPUT (file mnotes.in):
+
+3 5
+2
+1
+3
+2
+3
+4
+0
+1
+
+OUTPUT FORMAT:
+
+* Lines 1..Q: For each query, print a single integer that is the index
+        of the note that the cows should be playing.
+
+SAMPLE OUTPUT (file mnotes.out):
+
+2
+3
+3
+1
+1
+
+**********************************************************************
+
+Problem 8: Selfish Grazing [Neal Wu, 2008]
+
+Each of Farmer John's N (1 <= N <= 50,000) cows likes to graze in
+a certain part of the pasture, which can be thought of as a large
+one-dimeensional number line. Cow i's favorite grazing range starts
+at location S_i and ends at location E_i (1 <= S_i < E_i; S_i < E_i
+<= 100,000,000).
+
+Most folks know the cows are quite selfish; no cow wants to share
+any of its grazing area with another. Thus, two cows i and j can
+only graze at the same time if either S_i >= E_j or E_i <= S_j. FJ
+would like to know the maximum number of cows that can graze at the
+same time for a given set of cows and their preferences.
+
+Consider a set of 5 cows with ranges shown below:
+
+  ... 1    2    3    4    5    6    7    8    9   10   11   12   13 ...
+  ... |----|----|----|----|----|----|----|----|----|----|----|----|----
+Cow 1:      <===:===>          :              :              :
+Cow 2: <========:==============:==============:=============>:
+Cow 3:          :     <====>   :              :              :
+Cow 4:          :              :     <========:===>          :
+Cow 5:          :              :     <==>     :              :
+
+These ranges represent (2, 4), (1, 12), (4, 5), (7, 10), and (7,
+8), respectively.
+
+For a solution, the first, third, and fourth (or fifth) cows can
+all graze at the same time. If the second cow grazed, no other cows
+could graze. Also, the fourth and fifth cows cannot graze together,
+so it is impossible for four or more cows to graze.
+
+PROBLEM NAME: sgraze
+
+INPUT FORMAT:
+
+* Line 1: A  single integer: N
+
+* Lines 2..N+1: Line i+1 contains the two space-separated integers:
+        S_i and E_i
+
+SAMPLE INPUT (file sgraze.in):
+
+5
+2 4
+1 12
+4 5
+7 10
+7 8
+
+OUTPUT FORMAT:
+
+* Line 1: A single integer representing the maximum number of cows
+        that can graze at once.
+
+SAMPLE OUTPUT (file sgraze.out):
+
+3
+
+**********************************************************************

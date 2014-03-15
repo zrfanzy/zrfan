@@ -1,0 +1,10 @@
+1.dp[n]表示n位的答案
+
+2.排序+贪心
+
+3.设S[i]为前i个数的和；（S[j]-S[i]）mod p>=k;k<=（S[j]-S[i]）mod p<=p-1；Np+k<=S[j]-S[i]<=Np+p-1;
+当S[i]确定时,Np+k+S[i]<=s[i]<=Np+p-1+S[i].这样S[j] mod p的范围就确定了。
+
+4.|a-b|=max{a-b,b-a};|a-b|+|c-d|=max{(a+c)+(-b-d),(a-c)+(b+d),(-a+c)+(b-d),(-a-c)+(b+d)}
+对于每个位置，我们生成2^d个值。例如二维情况，v[0]=x1+x2,v[1]=-x1+x2,v[2]=x1-x2,v[3]=-x1-x2;设maxv[i]为所有v[i]的最大值，那么答案就是max{maxv[i]+maxv[2^d-1-i]}
+

@@ -1,0 +1,11 @@
+要点：递归、回溯时的路径压缩
+function searchhead(x:integer):integer;
+begin
+ if h[x]=x then searchhead:=x
+ else
+  begin
+   searchhead:=searchhead(h[x]);
+   l[x]:=l[x]+l[h[x]]; h[x]:=searchhead;
+  end;
+end;
+其中：h[x]表示x的“头”（相对、暂时的）；l[x]表示x到h[x]的距离（不包括x本身）

@@ -1,0 +1,235 @@
+**********************************************************************
+                           BRONZE PROBLEMS
+**********************************************************************
+                  Three problems numbered 11 through 13
+**********************************************************************
+
+Problem 11: Cow Pinball [Traditional, 2009]
+
+The cows are playing that cool Japanese 'pinball' game called
+Pachinko. You've probably seen it, you drop a ball in the top and
+it hits nails on the way down, veering just a little left or right,
+until the ball comes out the bottom.
+
+This pachinko game is special: the ball always hits the top nail
+of the R rows of nails (1 <= R <= 25) and then will hit either the
+right or left nail underneath that.  From there, the ball can hit
+the next nail that's just a bit lower and to the left or right of
+the second nail, and so on. The ball never veers too far (i.e.,
+more than 1/2 nail away) from the nail it just hit.
+
+This game also has scoring that's unique: you get points X_ij (0
+<= X_ij <= 3,000) for each little nail you hit on the way down. The
+cows want to maximize their score on this machine. What is the best
+score they can achieve?
+
+Here's an example triangle and a good route:
+
+                    7                        *7
+
+                  3   8                    *3   8
+
+                8   1   0                *8   1   0
+
+              2   7   4   4             2  *7   4   4
+
+            4   5   2   6   5         4  *5   2   6   5
+
+In the sample above, the route from 7 to 3 to 8 to 7 to 5 produces
+the highest sum: 30. It's not possible to go from 7 to 8 to 8 --
+the 8 on the third row is too far away.
+
+PROBLEM NAME: pachinko
+
+INPUT FORMAT:
+
+* Line 1: A single integer: R
+
+* Lines 2..R+1: Line i+1 contains i space-separated integers that
+        compose the scores of row R of the pachinko machine: X_i1,
+        X_i2, ...
+
+SAMPLE INPUT (file pachinko.in):
+
+5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+
+OUTPUT FORMAT:
+
+* Line 1: A single integer that is the maximum achievable score.
+
+SAMPLE OUTPUT (file pachinko.out):
+
+30
+
+OUTPUT DETAILS:
+
+No other achievable sum is higher.
+
+**********************************************************************
+
+Problem 12: The Chivalrous Cow [Rob Kolstad, 2009]
+
+Farmer John traded one of his cows for a cow that Farmer Don called
+'The Knight'. This cow has the unique ability to jump around the
+pasture in moves that looked like a knight on a chessboard (two
+squares over, one up... or maybe two squares down and one over,
+etc.). 'The Knight' can't jump on rocks or trees, but can really
+make her way around the pasture, which is partitioned for our
+purposes into an X by Y set of squares (1 <= X <= 150; 1 <= Y <=
+150).
+
+'The Knight' likes hay just like any other cow. Given a map of 'The
+Knight's starting place, locations of the tree, shrub, rock, and
+other obstacles, and the location of a bale of hay, determine how
+many 'hops' the Knight must make in order to get to the hay. The
+Knight cow will be marked by a 'K' on the map; obstacles by '*',
+and the haybale by 'H'. Here's a typical map:
+
+                    11 | . . . . . . . . . .
+                    10 | . . . . * . . . . . 
+                     9 | . . . . . . . . . . 
+                     8 | . . . * . * . . . . 
+                     7 | . . . . . . . * . . 
+                     6 | . . * . . * . . . H 
+                     5 | * . . . . . . . . . 
+                     4 | . . . * . . . * . . 
+                     3 | . K . . . . . . . . 
+                     2 | . . . * . . . . . * 
+                     1 | . . * . . . . * . . 
+                     0 ----------------------
+                                           1 
+                       0 1 2 3 4 5 6 7 8 9 0 
+
+The knight could travel the path indicated by A, B, C, ... to get
+to the hay bale in just 5 moves (other routes of length 5 might be
+possible):
+
+                    11 | . . . . . . . . . .
+                    10 | . . . . * . . . . .
+                     9 | . . . . . . . . . .
+                     8 | . . . * . * . . . .
+                     7 | . . . . . . . * . .
+                     6 | . . * . . * . . . F<
+                     5 | * . B . . . . . . .
+                     4 | . . . * C . . * E .
+                     3 | .>A . . . . D . . .
+                     2 | . . . * . . . . . *
+                     1 | . . * . . . . * . .
+                     0 ----------------------
+                                           1
+                       0 1 2 3 4 5 6 7 8 9 0
+
+Hint: This problem is probably most easily solved with a simple
+first-in/first-out 'queue' data structure implemented as a few
+parallel arrays.
+
+PROBLEM NAME: kcow
+
+INPUT FORMAT:
+
+* Line 1: Two space-separated integers: X and Y
+
+* Lines 2..Y+1: Line Y-i+2 contains X characters with no spaces (i.e.,
+        the map is read in as shown in the text above): map row i
+
+SAMPLE INPUT (file kcow.in):
+
+10 11
+..........
+....*.....
+..........
+...*.*....
+.......*..
+..*..*...H
+*.........
+...*...*..
+.K........
+...*.....*
+..*....*..
+
+OUTPUT FORMAT:
+
+* Line 1: A single integer that is the minimum number of hops to get
+        to the hay bale. It is always possible to get to the haybale.
+
+SAMPLE OUTPUT (file kcow.out):
+
+5
+
+**********************************************************************
+
+Problem 13: Claustrophobic Cows [Rob Kolstad, 2009]
+
+Farmer John has acquired a set of N (2 <= N <= 2,000) touchy cows
+who are conveniently numbered 1..N. They really hate being too close
+to other cows. A lot.
+
+FJ has recorded the integer X_i,Y_i coordinates of every cow i (1
+<= X_i <= 100,000; 1 <= Y_i <= 100,000).
+
+Among all those cows, exactly two of them are closest together. FJ
+would like to spread them out a bit. Determine which two are closest
+together and print their cow id numbers (i) in numerical order.
+
+By way of example, consider this field of cows (presented on a
+typewriter grid that has slightly different proportions than you
+might expect):
+
+                    10 | . . . . . . . 3 . . . . .
+                     9 | . 1 . . 2 . . . . . . . .
+                     8 | . . . . . . . . . . . . .
+                     7 | . . . . . . . . . . 4 . .
+                     6 | . . . . . . 9 . . . . . .
+                     5 | . 8 . . . . . . . . . . .
+                     4 | . . . . . 7 . . . . . . .
+                     3 | . . . . . . . . . 5 . . .
+                     2 | . . . . . . . . . . . . .
+                     1 | . . . . 6 . . . . . . . .
+                     0 ---------------------------
+                                           1 1 1 1
+                       0 1 2 3 4 5 6 7 8 9 0 1 2 3
+
+Quick visual inspection shows that cows 7 and 9 are closest together
+(the distance separating them is sqrt(1*1+2*2) = sqrt(5), so the
+output would be '7 9' on a single line (without quotes, of course).
+
+PROBLEM NAME: claust
+
+INPUT FORMAT:
+
+* Line 1: A single integer: N
+
+* Lines 2..N+1: Line i contains the coordinates of cow i expressed as
+        two space-separated integers: X_i and Y_i
+
+SAMPLE INPUT (file claust.in):
+
+9
+2 9
+5 9
+8 10
+11 7
+10 3
+5 1
+6 4
+2 5
+7 6
+
+INPUT DETAILS:
+
+As in the example.
+
+OUTPUT FORMAT:
+
+* Line 1: The two numerical IDs of the closest pair of cows (sorted)
+
+SAMPLE OUTPUT (file claust.out):
+
+7 9
+
+**********************************************************************

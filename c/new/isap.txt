@@ -1,0 +1,151 @@
+#include<iostream>
+#define maxn 300
+const int inf=1000000000;
+using namespace std;
+struct edge
+{
+    int u,v,next,f,pre;
+}e[2*maxn];
+int num,rnum;
+int head[maxn],rhead[maxn];
+int d[maxn];
+int numb[maxn];
+int start[maxn];
+int n,m;
+int p[maxn];
+int source,sink;
+void Init()
+{
+    memset(head,-1,sizeof(head));
+    memset(rhead,-1,sizeof(rhead));
+    memset(p,-1,sizeof(p));
+    num=0;
+    return ;
+}
+void BFS()
+{
+    int i,j;
+    for(i=1;i<=n;i++)
+    {
+        d[i]=n;
+        numb[i]=0;
+    }
+    int Q[maxn],head(0),tail(0);
+    d[sink]=0;
+    numb[0]=1;
+    Q[++tail]=sink;
+    while(head<tail)
+    {
+        i=Q[++head];
+        for(j=rhead[i];j!=-1;j=e[j].pre)
+        {
+            if(e[j].f==0||d[e[j].u]<n)
+                continue;
+            d[e[j].u]=d[i]+1;
+            numb[d[e[j].u]]++;
+            Q[++tail]=e[j].u;
+        }
+    }
+    return ;
+}
+int Augment()
+{
+    int i;
+    int tmp=inf;
+    for(i=p[sink];i!=-1;i=p[e[i].u])
+    {
+        if(tmp>e[i].f)
+            tmp=e[i].f;
+    }
+    for(i=p[sink];i!=-1;i=p[e[i].u])
+    {
+        e[i].f-=tmp;
+        e[i^1].f+=tmp;
+    }
+    return tmp;
+}
+int Retreat(int &i)
+{
+    int tmp,j,mind(n-1);
+    for(j=head[i];j!=-1;j=e[j].next)
+    {
+        if(e[j].f>0&&d[e[j].v]<mind)
+            mind=d[e[j].v];
+    }
+    tmp=d[i];
+    d[i]=mind+1;
+    numb[tmp]--;
+    numb[d[i]]++;
+    if(i!=source)
+        i=e[p[i]].u;
+    return numb[tmp];
+}
+int maxflow()
+{
+    int flow(0),i,j;
+    BFS();
+    for(i=1;i<=n;i++)
+        start[i]=head[i];
+    i=source;
+    while(d[source]<n)
+    {
+        for(j=start[i];j!=-1;j=e[j].next)
+            if(e[j].f>0&&d[i]==d[e[j].v]+1)
+                break;
+        if(j!=-1)
+        {
+            start[i]=j;
+            p[e[j].v]=j;
+            i=e[j].v;
+            if(i==sink)
+            {
+                flow+=Augment();
+                i=source;
+            }
+        }
+        else
+        {
+            start[i]=head[i];
+            if(Retreat(i)==0)
+                break;
+        }
+    }
+    return flow;
+}
+void addedge(int a,int b,int c)
+{
+    e[num].next=head[a];
+    head[a]=num;
+    e[num].pre=rhead[b];
+    rhead[b]=num;
+    e[num].f=c;
+    e[num].u=a;
+    e[num++].v=b;
+    e[num].next=head[b];
+    head[b]=num;
+    e[num].pre=rhead[a];
+    rhead[a]=num;
+    e[num].u=b;
+    e[num].v=a;
+    e[num++].f=0;
+    return ;
+}
+int main()
+{
+    int i;
+    int a,b,c;
+    while(scanf("%d%d",&m,&n)==2)
+    {
+        source=1;
+        sink=n;
+        Init();
+        for(i=1;i<=m;i++)
+        {
+            scanf("%d%d%d",&a,&b,&c);
+            addedge(a,b,c);
+        }
+        printf("%d\n",maxflow());
+    }
+    system("pause");
+    return 0;
+}

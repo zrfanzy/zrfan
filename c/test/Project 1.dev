@@ -1,0 +1,12 @@
+[Project]
+FileName=D:\zrfan\c\test\Project 1.dev
+Name=Project 2
+Use_gpp=1
+UnitCount=1
+ResFiles=D:\zrfan\c\test\rsrc.rc
+NoConsole=1
+IsDll=0
+Icon=D:\zrfan\c++\Bin\Mainicon.ico
+[Unit1]
+FileName=D:\zrfan\c\test\b.cpp
+FileTime=985382679

@@ -1,0 +1,7 @@
+1.经典dp
+
+2.广搜
+
+3.枚举
+
+官方解答：http://ace.delos.com/NOV09.htm
