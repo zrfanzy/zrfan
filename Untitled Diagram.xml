@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-05-11T10:15:13.823Z" agent="5.0 (X11)" version="13.0.9" etag="41lYahl9pWGlw3cSZTq2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-05-11T17:33:50.004Z" agent="5.0 (X11)" etag="Zrag3aZXgV7xBUaGsOxj" version="13.0.9" type="github">
   <diagram id="d234c604-aaad-e8e5-aced-f8e9307f2467" name="Page-1">
-    <mxGraphModel dx="2074" dy="1198" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1037" dy="599" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -319,7 +319,7 @@
         <mxCell id="120" value="Original image" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Times New Roman;fontSize=20;fontColor=#030000;" parent="1" vertex="1">
           <mxGeometry x="102" y="1162" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="121" value="Bayer&lt;div&gt;mosaic&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Times New Roman;fontSize=20;fontColor=#030000;" parent="1" vertex="1">
+        <mxCell id="121" value="&lt;div&gt;Raw&lt;/div&gt;&lt;div&gt;image&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Times New Roman;fontSize=20;fontColor=#030000;" parent="1" vertex="1">
           <mxGeometry x="723" y="1162" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="122" value="Ground-truth" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Times New Roman;fontSize=20;fontColor=#030000;" parent="1" vertex="1">
